@@ -1,0 +1,11 @@
+[project]
+name = "topic-modeling"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bertopic>=0.16.4",
+    "datasets>=3.3.2",
+    "numba>=0.61.0",
+]
