@@ -14,6 +14,7 @@ if __name__=="__main__":
         "topic_model_dir": "models/topic_models",
         "hash_key": hash_key
     }
+    save_dict_to_json(data=train_config, dir_path=f"data/output/{hash_key}", filename="train_config.json")
 
     label_config = {
         "business": "any business related topic",
@@ -23,13 +24,16 @@ if __name__=="__main__":
         "sports": "any sports related topic",
         "technology": "any technology related topic"
     }
+    save_dict_to_json(data=train_config, dir_path=f"data/output/{hash_key}", filename="label_config.json")
 
-    # save_dict_to_json(data=train_config, dir_path=f"data/output/{hash_key}", filename="train_config.json")
-    # save_dict_to_json(data=train_config, dir_path=f"data/output/{hash_key}", filename="label_config.json")
-    # trainer = TrainTopicModel(**train_config)
-    # trainer.download_hf_dataset()
-    # trainer.train_topic_model()
+    # Training Topic Model
+    trainer = TrainTopicModel(**train_config)
+    trainer.download_hf_dataset()
+    trainer.train_topic_model()
 
+    # Labelling Data
     labeller = Labeller(**train_config)
     topic_info_df, document_info_df = labeller.get_topic_model_info()
-    labeller.label_data(document_info_df=document_info_df, label_config=label_config)
+    labeller.label_good_quality_data(document_info_df=document_info_df, label_config=label_config)
+    labeller.label_poor_quality_data(document_info_df=document_info_df, label_config=label_config)
+    labeller.collate_labelled_data(document_info_df=document_info_df)

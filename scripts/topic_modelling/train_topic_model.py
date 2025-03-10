@@ -5,6 +5,9 @@ from hdbscan import HDBSCAN
 from bertopic import BERTopic
 
 class TrainTopicModel:
+    """
+    Class to train topic model using BertTopic
+    """
     def __init__(self, dataset, data_cache_dir, data_col_name, embedding_model, embedding_model_cache_folder,
                  topic_model_dir, hash_key):
         self.dataset = dataset
@@ -16,9 +19,19 @@ class TrainTopicModel:
         self.hash_key = hash_key
 
     def download_hf_dataset(self):
+        """
+        Download dataset from HuggingFace and store it in the data cache directory
+
+        :return: None
+        """
         load_dataset(path=self.dataset, cache_dir=self.data_cache_dir)
 
     def train_topic_model(self):
+        """
+        Train topic model using the dataset downloaded from HuggingFace using BertTopic
+
+        :return: None
+        """
         print("Loading Dataset ...")
         dataset = load_dataset(path=self.dataset, cache_dir=self.data_cache_dir)
         train_dataset = dataset["train"]
