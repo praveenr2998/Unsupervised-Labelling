@@ -1,6 +1,6 @@
 # 📚 UNSUPERVISED LABELLING
 Labelling huge amount of data is a tedious task. This project aims to automate the process of labelling binary/multi-class classification data using topic modeling and Large Langauge Model(LLM). The motivation is that LLMs have been proven to be good at labelling data 
-but sending huge amount of data for labelling is a costly approach, so instead all data points are clustered and topic are derived from the clustered data points. Then the topics are used for identifying labels which significantly reduces the cost of labelling.
+but sending huge amount of data for labelling is a costly approach, so instead all data points are clustered and topic are derived from the clustered data points. Then these topics are used for identifying labels which significantly reduces the cost of labelling.
 
 ![Alt text](assets/flow.png)
 * The raw data is sent for clustering
