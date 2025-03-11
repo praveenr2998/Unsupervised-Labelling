@@ -6,12 +6,12 @@ Labelling huge amount of data is a tedious task. This project aims to automate t
 * **Embedding model** converts each data point into vector
 * **UMAP** is used for dimensionality reduction
 * **HDBSCAN** is used for clustering
-* **Count vectorizer** and **c-TF-IDF** are used for topic modeling which is part of BERTopic
+* **Count vectorizer** and **c-TF-IDF** are used for topic modeling which is part of **BERTopic**
 * The topics generated are send to LLM for labelling
 * The labelling is divided into two stages
     * Good Quality Data
-        * The data is labelled as good quality based on **Bertopic** topic and confidence probability
-        * The topics from Bertopic are sent to LLM for labelling
+        * The data is labelled as good quality based on **BERTopic** topic and confidence probability
+        * The topics from BERTopic are sent to LLM for labelling
     * Poor Quality Data
         * The data is labelled as poor quality(which has topic -1 and confidence probability below threshold)
         * **KeyBert** is used for topic extraction
