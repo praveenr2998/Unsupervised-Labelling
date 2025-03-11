@@ -3,19 +3,19 @@ Labelling huge amount of data is a tedious task. This project aims to automate t
 
 ![Alt text](assets/flow.png)
 * The raw data is sent for clustering
-* Embedding model converts each data point into vector
-* UMAP is used for dimensionality reduction
-* HDBSCAN is used for clustering
-* Count vectorizer and c-TF-IDF are used for topic modeling which is part of BERTopic
+* **Embedding model** converts each data point into vector
+* **UMAP** is used for dimensionality reduction
+* **HDBSCAN** is used for clustering
+* **Count vectorizer** and **c-TF-IDF** are used for topic modeling which is part of BERTopic
 * The topics generated are send to LLM for labelling
 * The labelling is divided into two stages
     * Good Quality Data
-        * The data is labelled as good quality based on Bertopic topic and confidence probability
+        * The data is labelled as good quality based on **Bertopic** topic and confidence probability
         * The topics from Bertopic are sent to LLM for labelling
     * Poor Quality Data
         * The data is labelled as poor quality(which has topic -1 and confidence probability below threshold)
-        * KeyBert is used for topic extraction
-        * The topics from KeyBert are sent to LLM for labelling
+        * **KeyBert** is used for topic extraction
+        * The topics from KeyBert are sent to **LLM** for labelling
 * The labelled data is collated and saved
 
 -----------------
@@ -73,7 +73,7 @@ uv run main.py
 The output is stored in the data/output folder. A hash key is generated for each run and the output is stored in a folder with the hash key. The output folder contains the following files:
 * train_config.json
 * label_config.json
-* final_labelled_data.csv
+* **final_labelled_data.csv**
 * labelled_data_confident.json
 * labelled_data_non_confident.json
 
