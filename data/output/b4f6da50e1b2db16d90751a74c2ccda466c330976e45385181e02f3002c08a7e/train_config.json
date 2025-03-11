@@ -1,9 +1,0 @@
-{
-    "dataset": "SetFit/bbc-news",
-    "data_cache_dir": "data/input",
-    "data_col_name": "text",
-    "embedding_model": "thenlper/gte-small",
-    "embedding_model_cache_folder": "models/embedding_models",
-    "topic_model_dir": "models/topic_models",
-    "hash_key": "b4f6da50e1b2db16d90751a74c2ccda466c330976e45385181e02f3002c08a7e"
-}
