@@ -1,5 +1,5 @@
 # UNSUPERVISED LABELLING
-Labelling huge amount of data is a tedious task. This project aims to automate the process of labelling data using a combination of topic model and a LLM.
+Labelling huge amount of data is a tedious task. This project aims to automate the process of labelling multi-class classification data using LLMs.
 
 ![Alt text](assets/flow.png)
 * The raw data is sent for clustering
