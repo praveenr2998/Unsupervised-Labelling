@@ -27,13 +27,10 @@ def save_dict_to_json(data, dir_path, filename):
     :param dir_path: Directory where the JSON file should be saved
     :param filename: Name of the JSON file (should include .json extension)
     """
-    # Ensure the directory exists
     os.makedirs(dir_path, exist_ok=True)
 
-    # Define the full file path
     file_path = os.path.join(dir_path, filename)
 
-    # Write dictionary to JSON file
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
