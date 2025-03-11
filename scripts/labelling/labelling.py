@@ -1,7 +1,3 @@
-"""
-TODO: Remove break statement from labelling loop
-"""
-
 from bertopic import BERTopic
 from datasets import load_dataset
 from utils.prompts import labelling_prompt
@@ -9,6 +5,7 @@ from utils.pydantic_models import LabellingResponseModel
 from utils.llm_utils import LLMUtils
 from utils.utilities import save_dict_to_json
 from keybert import KeyBERT
+from tqdm import tqdm
 import json
 
 class Labeller:
@@ -66,7 +63,7 @@ class Labeller:
         filtered_doc_info_df = document_info_df[(document_info_df["Topic"] != -1) &
                                                 (document_info_df["Probability"] > 0.59)]
 
-        for i in range(0, len(filtered_doc_info_df), iter_size):
+        for i in tqdm(range(0, len(filtered_doc_info_df), iter_size), desc="Labelling Good Quality Data"):
             chunk = filtered_doc_info_df.iloc[i:i + iter_size]
             topic_dict = {}
             for index, row in chunk.iterrows():
@@ -101,7 +98,7 @@ class Labeller:
         filtered_doc_info_df = document_info_df[(document_info_df["Topic"] == -1) |
                                                 (document_info_df["Probability"] < 0.6)]
 
-        for i in range(0, len(filtered_doc_info_df), iter_size):
+        for i in tqdm(range(0, len(filtered_doc_info_df), iter_size), desc="Labelling Poor Quality Data"):
             chunk = filtered_doc_info_df.iloc[i:i + iter_size]
             topic_dict = {}
             for index, row in chunk.iterrows():
@@ -132,6 +129,8 @@ class Labeller:
         """
         print("Collating Labelled Data ...")
         labelled_data_dict = json.load(open(f"data/output/{self.hash_key}/labelled_data_confident.json"))
+        print(len(labelled_data_dict))
         labelled_data_dict.update(json.load(open(f"data/output/{self.hash_key}/labelled_data_non_confident.json")))
-        document_info_df["Label"] = document_info_df["ID"].apply(lambda x: labelled_data_dict.get(x))
+        print(len(labelled_data_dict))
+        document_info_df["Label"] = document_info_df["ID"].apply(lambda x: labelled_data_dict.get(str(x)))
         document_info_df.to_csv(path_or_buf=f"data/output/{self.hash_key}/final_labelled_data.csv", index=False)
