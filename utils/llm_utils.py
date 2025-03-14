@@ -3,6 +3,10 @@ import openai
 
 from openai import AzureOpenAI
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from cachetools import TTLCache, cached
+
+# Caching 1000 responses for 24 hours
+cache = TTLCache(maxsize=1000, ttl=86400)
 
 class LLMUtils:
     def __init__(self, llm_choice):
@@ -15,6 +19,7 @@ class LLMUtils:
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10),
            retry=retry_if_exception_type(openai.OpenAIError))
+    @cached(cache)
     def chat_completion(self, system_prompt, user_prompt, response_model, chat_history=None):
         """
         LLM chat completion API
@@ -45,7 +50,6 @@ class LLMUtils:
         parsed_response = completion.choices[0].message.parsed
         self.validate_llm_response(parsed_response=parsed_response, response_model=response_model)
         return parsed_response
-
 
     @staticmethod
     def validate_llm_response(parsed_response, response_model):
