@@ -99,5 +99,5 @@ The trained topic model is stored in the **models/topic_models** folder with the
 
 -----------------
 ## FUTURE WORK
-* Intelligent clustering - If clusters could e made based on labels then efficient labelling could be done(with additional steps)
+* Intelligent clustering - If clusters could be made based on labels then efficient labelling could be done(with additional steps)
 * Better topic modelling - The topic modelling could be improved by extracting targeted topics.
