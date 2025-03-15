@@ -88,7 +88,7 @@ The trained topic model is stored in the **models/topic_models** folder with the
 ## EXPERIMENT OBSERVATIONS
 * Dataset labelled - 1226 data points
 * Number of hits to LLM(approximate) - 132
-* LLM hits at any point does not send complete text only extracted topics are sent to LLM which is significantly smaller
+* LLM hits at any point does not send complete text only extracted topics using topic modelling are sent to LLM which is significantly smaller
 * Accuracy - **74.45 %**
 
 -----------------
@@ -96,3 +96,8 @@ The trained topic model is stored in the **models/topic_models** folder with the
 * This project was intended to check the above-mentioned way of unsupervised labelling and in no way claims that any labelling could be done with the same level of accuracy.
 * As of now I believe that if the quality of extracted topics is good there is a high chance that the labelling quality will be good.
 * The quality threshold score should be adjusted based on the dataset and the quality of the topics extracted.
+
+-----------------
+## FUTURE WORK
+* Intelligent clustering - If clusters could e made based on labels then efficient labelling could be done(with additional steps)
+* Better topic modelling - The topic modelling could be improved by extracting targeted topics.
