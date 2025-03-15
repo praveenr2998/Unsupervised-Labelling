@@ -81,7 +81,7 @@ The output is stored in the data/output folder. A hash key is generated for each
 * topic_info.csv
 * topic_label_dict.json
 
-The final_labelled_data.csv contains the labelled data along with the ID of the data point. The labelled_data_confident.json and labelled_data_non_confident.json contains the labelled data for good and poor quality data respectively.
+The final_labelled_data.csv contains the labels along with true labels. The labelled_data_confident.json and labelled_data_non_confident.json contains the labelled data for good and poor quality data respectively.
 The trained topic model is stored in the **models/topic_models** folder with the name **trained_model_{hash_key}**.
 
 -----------------
