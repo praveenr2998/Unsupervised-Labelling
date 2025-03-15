@@ -32,9 +32,9 @@ uv sync
 AZURE_OPENAI_BASE=https://your-resource-name.openai.azure.com
 AZURE_OPENAI_API_KEY=your-api-key
 AZURE_OPENAI_VERSION=2023-05-15
-AZURE_OPENAI_MODEL=gpt-35-turbo
+AZURE_OPENAI_MODEL=gpt-4o-mini
 ```
-NOTE: LLM could be replaced with any other LLM, this setup uses Azure OpenAI
+NOTE: LLM could be replaced with any other LLM(of course with some code changes), this setup uses Azure OpenAI
 
 -----------------
 ## CONFIGURATION
