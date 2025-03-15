@@ -118,8 +118,6 @@ class Labeller:
             llm_response = self.llm.chat_completion(system_prompt=system_prompt, user_prompt=user_prompt,
                                                     response_model=PoorQualityLabellingResponseModel)
             labelled_data = llm_response.labelled_data
-            print(topic_dict)
-            print(labelled_data)
             for labelled_data in labelled_data:
                 filtered_doc_info_df.loc[filtered_doc_info_df["ID"] == labelled_data.id, "Label"] = labelled_data.label
 
