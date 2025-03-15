@@ -2,8 +2,11 @@ from pydantic import BaseModel
 from typing import List, Union, Optional
 
 class LabellingResponseSubModel(BaseModel):
-    id: str
+    id: int
     label: str
 
-class LabellingResponseModel(BaseModel):
+class PoorQualityLabellingResponseModel(BaseModel):
     labelled_data: List[LabellingResponseSubModel]
+
+class GoodQualityLabellingResponseModel(BaseModel):
+    label: str

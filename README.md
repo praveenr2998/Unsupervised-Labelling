@@ -74,9 +74,19 @@ uv run main.py
 The output is stored in the data/output folder. A hash key is generated for each run and the output is stored in a folder with the hash key. The output folder contains the following files:
 * train_config.json
 * label_config.json
+* document_info.csv
 * **final_labelled_data.csv**
-* labelled_data_confident.json
-* labelled_data_non_confident.json
+* good_quality_data.csv
+* poor_quality_data.csv
+* topic_info.csv
+* topic_label_dict.json
 
 The final_labelled_data.csv contains the labelled data along with the ID of the data point. The labelled_data_confident.json and labelled_data_non_confident.json contains the labelled data for good and poor quality data respectively.
 The trained topic model is stored in the **models/topic_models** folder with the name **trained_model_{hash_key}**.
+
+-----------------
+## EXPERIMENT OBSERVATIONS
+* Dataset labelled - 1226 data points
+* Number of hits to LLM(approximate) - 132
+* LLM hits at any point does not send complete text only extracted topics are sent to LLM which is significantly smaller
+* Accuracy - **74.45 %**

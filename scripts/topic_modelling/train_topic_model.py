@@ -35,13 +35,16 @@ class TrainTopicModel:
         print("Loading Dataset ...")
         dataset = load_dataset(path=self.dataset, cache_dir=self.data_cache_dir)
         train_dataset = dataset["train"]
+        # Truncate text column to first 2500 words
+        train_dataset = train_dataset.map(
+            lambda x: {self.data_col_name: " ".join(x[self.data_col_name].split()[:2500])})
         text = train_dataset[self.data_col_name]
 
         print("Creating Embeddings ...")
         embedding_model = SentenceTransformer(
             model_name_or_path=self.embedding_model, cache_folder=self.embedding_model_cache_folder
         )
-        embeddings = embedding_model.encode(text, show_progress_bar=True)
+        embeddings = embedding_model.encode(text, batch_size=2, show_progress_bar=True)
 
         print("Dimensionality Reduction ...")
         umap_model = UMAP(
