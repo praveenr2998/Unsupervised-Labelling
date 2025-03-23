@@ -11,10 +11,10 @@ but sending huge amount of data for labelling is a costly approach, so instead a
 * The topics generated are send to LLM for labelling
 * The labelling is divided into two stages
     * Good Quality Data
-        * The data is labelled as good quality based on **BERTopic**'s topic and confidence probability
+        * The data is labelled as good quality based on **BERTopic**'s topic and confidence score
         * The topics from BERTopic are sent to LLM for labelling
     * Poor Quality Data
-        * The data is labelled as poor quality(which has topic -1 and confidence probability below threshold)
+        * The data is labelled as poor quality(which has topic -1 and confidence score below threshold)
         * **KeyBert** is used for topic extraction
         * The topics from KeyBert are sent to **LLM** for labelling
 * The labelled data is collated and saved
