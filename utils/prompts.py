@@ -11,7 +11,7 @@ poor_quality_labelling_prompt = {
     
     Your task is to assign a label to each ID(containing many topics) in the data based on the label config and return the labelled data in the below format
     {ID: label}
-    """
+    """,
 }
 
 good_quality_labelling_prompt = {
@@ -25,5 +25,5 @@ good_quality_labelling_prompt = {
     '`label_config`'
     
     Label the topic based on the label config and return the label
-    """
+    """,
 }

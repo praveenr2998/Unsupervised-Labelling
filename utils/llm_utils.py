@@ -1,12 +1,18 @@
 import os
-import openai
 
-from openai import AzureOpenAI
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+import openai
 from cachetools import TTLCache, cached
+from openai import AzureOpenAI
+from tenacity import (
+    retry,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential,
+)
 
 # Caching 1000 responses for 24 hours
 cache = TTLCache(maxsize=1000, ttl=86400)
+
 
 class LLMUtils:
     def __init__(self, llm_choice):
@@ -14,13 +20,18 @@ class LLMUtils:
             self.client = AzureOpenAI(
                 azure_endpoint=os.getenv("AZURE_OPENAI_BASE"),
                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                api_version=os.getenv("AZURE_OPENAI_VERSION")
+                api_version=os.getenv("AZURE_OPENAI_VERSION"),
             )
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10),
-           retry=retry_if_exception_type(openai.OpenAIError))
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception_type(openai.OpenAIError),
+    )
     @cached(cache)
-    def chat_completion(self, system_prompt, user_prompt, response_model, chat_history=None):
+    def chat_completion(
+        self, system_prompt, user_prompt, response_model, chat_history=None
+    ):
         """
         LLM chat completion API
 
@@ -31,10 +42,12 @@ class LLMUtils:
         :return: pydantic model - response from llm
         """
         if chat_history:
-            chat_history.extend([
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ])
+            chat_history.extend(
+                [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ]
+            )
             prompt = chat_history
         else:
             prompt = [
@@ -48,7 +61,9 @@ class LLMUtils:
             response_format=response_model,
         )
         parsed_response = completion.choices[0].message.parsed
-        self.validate_llm_response(parsed_response=parsed_response, response_model=response_model)
+        self.validate_llm_response(
+            parsed_response=parsed_response, response_model=response_model
+        )
         return parsed_response
 
     @staticmethod

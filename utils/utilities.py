@@ -1,7 +1,8 @@
-import hashlib
 import datetime
-import os
+import hashlib
 import json
+import os
+
 
 def generate_hash_key():
     """
@@ -31,7 +32,7 @@ def save_dict_to_json(data, dir_path, filename):
 
     file_path = os.path.join(dir_path, filename)
 
-    with open(file_path, 'w', encoding='utf-8') as json_file:
+    with open(file_path, "w", encoding="utf-8") as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
     print(f"Dictionary saved to {file_path}")

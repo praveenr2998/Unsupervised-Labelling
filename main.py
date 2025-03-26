@@ -1,8 +1,8 @@
-from scripts.topic_modelling.train_topic_model import TrainTopicModel
 from scripts.labelling.labelling import Labeller
+from scripts.topic_modelling.train_topic_model import TrainTopicModel
 from utils.utilities import generate_hash_key, save_dict_to_json
 
-if __name__=="__main__":
+if __name__ == "__main__":
     hash_key = generate_hash_key()
 
     train_config = {
@@ -14,16 +14,24 @@ if __name__=="__main__":
         "topic_model_dir": "models/topic_models",
         "hash_key": hash_key,
     }
-    save_dict_to_json(data=train_config, dir_path=f"data/output/{hash_key}", filename="train_config.json")
+    save_dict_to_json(
+        data=train_config,
+        dir_path=f"data/output/{hash_key}",
+        filename="train_config.json",
+    )
 
     label_config = {
         "business": "any business related topic",
         "entertainment": "any entertainment related topic",
         "politics": "any politics related topic",
         "sport": "any sports related topic",
-        "tech": "any technology related topic"
+        "tech": "any technology related topic",
     }
-    save_dict_to_json(data=label_config, dir_path=f"data/output/{hash_key}", filename="label_config.json")
+    save_dict_to_json(
+        data=label_config,
+        dir_path=f"data/output/{hash_key}",
+        filename="label_config.json",
+    )
 
     # Training Topic Model
     trainer = TrainTopicModel(**train_config)
@@ -33,6 +41,10 @@ if __name__=="__main__":
     # Labelling Data
     labeller = Labeller(**train_config)
     topic_info_df, document_info_df = labeller.get_topic_model_info()
-    labeller.label_good_quality_data(document_info_df=document_info_df, label_config=label_config)
-    labeller.label_poor_quality_data(document_info_df=document_info_df, label_config=label_config)
+    labeller.label_good_quality_data(
+        document_info_df=document_info_df, label_config=label_config
+    )
+    labeller.label_poor_quality_data(
+        document_info_df=document_info_df, label_config=label_config
+    )
     labeller.collate_labelled_data()
